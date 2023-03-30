@@ -1,0 +1,41 @@
+<?php
+
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+
+$link = mysqli_connect("sdb-56.hosting.stackcp.net", "student87-35303133bf82", "ua92-studentAc", "student87-35303133bf82");
+// Check connection
+if ($link === false) {
+    die("Connection failed: ");
+}
+
+
+/*
+The isset() function checks whether a variable
+ is set, which means that it has to be declared 
+ and is not NULL. 
+ This function returns true if the variable
+  exists and is not NULL, 
+  otherwise it returns false.
+*/
+if (isset($_POST['submit'])) {
+
+    $Name = $_POST['Name'];
+    $Address = $_POST['Address'];
+    $ContactNo = $_POST['ContactNo'];
+   
+/*
+mysqli_query() function accepts a string value
+representing a query as one of the parameters
+and, executes/performs the given query 
+on the database
+*/
+    $sql = "INSERT INTO Students (Name,Address,ContactNo) VALUES ('$Name','$Address','$ContactNo')";
+    if (mysqli_query($link, $sql)) {
+      echo "New record created successfully";
+    } else {
+      echo "Error adding record ";
+    }
+
+}
+
+?>
